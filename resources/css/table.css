@@ -1,0 +1,126 @@
+/* Table Border Styles */
+.table-bordered {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #e5e7eb !important;
+}
+
+/* Table Cell Sizes */
+.td-xs {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1rem !important;
+}
+
+.td-s {
+    padding: 0.4rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+}
+
+.td-md {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.9375rem !important;
+    line-height: 1.375rem !important;
+}
+
+.td-lg {
+    padding: 0.75rem 1.25rem !important;
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+}
+
+/* Table Header Sizes */
+.th-xs {
+    padding: 0.4rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    background-color: rgb(243 244 246) !important;
+    white-space: nowrap !important;
+}
+
+.th-s {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    background-color: rgb(243 244 246) !important;
+    white-space: nowrap !important;
+}
+
+.th-md {
+    padding: 0.75rem 1rem !important;
+    font-size: 0.9375rem !important;
+    line-height: 1.375rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    background-color: rgb(243 244 246) !important;
+    white-space: nowrap !important;
+}
+
+.th-lg {
+    padding: 1rem 1.25rem !important;
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    background-color: rgb(243 244 246) !important;
+    white-space: nowrap !important;
+}
+
+/* Table Row Hover */
+.tr-hover:hover {
+    background-color: rgb(249 250 251) !important;
+    transition: background-color 0.2s ease-in-out !important;
+}
+
+/* Table Striped Rows */
+.table-striped tr:nth-child(even) {
+    background-color: rgb(249 250 251) !important;
+}
+
+/* Action Button Sizes */
+.action-xs {
+    @apply p-0.5 !important;
+}
+
+.action-xs svg {
+    @apply w-4 h-4 !important;
+}
+
+.action-s {
+    @apply p-1 !important;
+}
+
+.action-s svg {
+    @apply w-5 h-5 !important;
+}
+
+.action-md {
+    @apply p-1.5 !important;
+}
+
+.action-md svg {
+    @apply w-6 h-6 !important;
+}
+
+/* Action Button Colors */
+.action-edit {
+    @apply text-blue-600 hover:text-blue-800 !important;
+}
+
+.action-delete {
+    @apply text-red-600 hover:text-red-800 !important;
+}
+
+.action-view {
+    @apply text-green-600 hover:text-green-800 !important;
+}
