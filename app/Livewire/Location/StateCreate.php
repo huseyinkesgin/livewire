@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Location;
 
-use App\Models\State;
+use App\Models\Lokasyon\State;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,20 +12,25 @@ class StateCreate extends Component
     public $form = [
         'Code' => '',
         'Name' => '',
-        'Status' => '',
+        'Status' => "1",
         'Description' => ''
     ];
+
+    protected $listeners = ['openCreateModal' => 'open'];
 
     public function mount()
     {
         $this->generateCode();
     }
 
+    public function open()
+    {
+        $this->showModal = true;
+    }
+
     public function generateCode()
     {
-        $lastState = State::orderBy('Code', 'desc')->first();
-        $nextCode = $lastState ? str_pad((int)$lastState->Code + 1, 2, '0', STR_PAD_LEFT) : '01';
-        $this->form['Code'] = $nextCode;
+        $this->form['Code'] = State::generateCode();
     }
 
     public function save()
@@ -62,7 +67,7 @@ class StateCreate extends Component
         $this->form = [
             'Code' => '',
             'Name' => '',
-            'Status' => '',
+            'Status' => "1",
             'Description' => ''
         ];
         $this->generateCode();

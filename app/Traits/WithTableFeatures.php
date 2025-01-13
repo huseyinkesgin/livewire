@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait WithTableFeatures
 {
-    public $perPage = 10;
+    public $perPage = 20;
     public $search = '';
     public $sortField = 'id';
     public $sortDirection = 'asc';

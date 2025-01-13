@@ -1,19 +1,13 @@
 <div>
-    <button type="button" class="btn btn-add" wire:click="$set('showModal', true)">
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-        </svg>
-        İl Ekle
-    </button>
 
-    <x-form-modal 
-        wire:model="showModal" 
-        modalTitle="İl Ekle" 
+    <x-form-modal
+        wire:model="showModal"
+        modalTitle="İl Ekle"
         mode="create"
         :modalWidth="350"
         :modalHeight="280"
     >
-        <div class="space-y-3">
+        <div class="space-y-1">
             <div class="grid grid-cols-12 items-center gap-4">
                 <x-label for="Code" value="İl Kodu" class="col-span-3 text-right label-xs" />
                 <div class="col-span-9">

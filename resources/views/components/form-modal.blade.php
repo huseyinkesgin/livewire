@@ -6,7 +6,7 @@
 ])
 
 <div
-    x-data="{ 
+    x-data="{
         show: @entangle($attributes->wire('model')),
         init() {
             this.$watch('show', value => {
@@ -14,6 +14,8 @@
                     this.$nextTick(() => {
                         this.$refs.code.focus();
                     });
+                } else {
+                    this.$dispatch('closeModal');
                 }
             });
         }
@@ -46,29 +48,27 @@
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             class="relative inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle"
             :style="{ width: '{{ $modalWidth }}px', height: '{{ $modalHeight }}px' }"
-            @click.away="show = false"
         >
             <!-- Modal Header -->
             <div class="px-4 py-3 bg-gray-50 border-b">
-                <h3 class="text-lg font-medium text-gray-900">
-                    {{ $modalTitle }}
-                </h3>
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-medium text-gray-900">
+                        {{ $modalTitle }}
+                    </h3>
+                    <div class="inline-flex gap-0.5">
+                        <button type="button" wire:click="save" class="focus:outline-none">
+                            <x-icons name="save" />
+                        </button>
+                        <button type="button" wire:click="$set('showModal', false)" class="focus:outline-none">
+                            <x-icons name="close" />
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- Modal Content -->
             <div class="px-4 py-3">
                 {{ $slot }}
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="px-4 py-3 bg-gray-50 text-right border-t">
-                <x-secondary-button wire:click="$set('showModal', false)" wire:loading.attr="disabled">
-                    İptal
-                </x-secondary-button>
-
-                <x-button class="ml-2" wire:click="save" wire:loading.attr="disabled">
-                    Kaydet
-                </x-button>
             </div>
         </div>
     </div>

@@ -87,6 +87,7 @@
     border: 1px solid transparent !important;
     font-weight: 500 !important;
     border-radius: 0 !important;
+    padding: 0.1rem 0.75rem !important;
 }
 
 .btn-add {

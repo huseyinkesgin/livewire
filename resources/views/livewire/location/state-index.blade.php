@@ -1,10 +1,8 @@
-<div>
-   
-    <div class="py-1">
-        <div class="mx-auto">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-           
-             @livewire('location.state-table')
+<div class="h-full overflow-hidden">
+    <div class="h-full">
+        <div class="h-full">
+            <div class="h-full bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                @livewire('location.state-table')
             </div>
         </div>
     </div>
