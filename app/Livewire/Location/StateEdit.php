@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Location;
 
-use App\Models\State;
 use Livewire\Component;
+use App\Models\Lokasyon\State;
 use Illuminate\Support\Facades\Validator;
 
 class StateEdit extends Component

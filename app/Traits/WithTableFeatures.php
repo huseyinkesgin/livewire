@@ -7,7 +7,40 @@ trait WithTableFeatures
     public $perPage = 20;
     public $search = '';
     public $sortField = 'id';
-    public $sortDirection = 'asc';
+    public $sortDirection = 'desc';
+    public $activeRow = null;
+
+    public function setActiveRow($id)
+    {
+        $this->activeRow = $id;
+        $this->dispatch('row-activated', ['id' => $id]);
+    }
+
+    public function handleRowClick($id)
+    {
+        $this->setActiveRow($id);
+    }
+
+    public function handleEditRow($params)
+    {
+        $id = is_array($params) ? $params['id'] : $params;
+        $this->setActiveRow($id);
+        $this->dispatch('editRow', ['id' => $id]);
+    }
+
+    public function handleDeleteRow($params)
+    {
+        $id = is_array($params) ? $params['id'] : $params;
+        $this->setActiveRow($id);
+        $this->dispatch('deleteRow', ['id' => $id]);
+    }
+
+    public function handleSelectRow($params)
+    {
+        $id = is_array($params) ? $params['id'] : $params;
+        $this->setActiveRow($id);
+        $this->dispatch('selectRow', ['id' => $id]);
+    }
 
     public function sortBy($field)
     {
@@ -15,7 +48,7 @@ trait WithTableFeatures
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
         } else {
             $this->sortField = $field;
-            $this->sortDirection = 'asc';
+            $this->sortDirection = 'desc';
         }
     }
 
@@ -50,10 +83,5 @@ trait WithTableFeatures
         return property_exists($this, 'searchableFields')
             ? $this->searchableFields
             : ['name'];
-    }
-
-    public function handleEditRow($id)
-    {
-        $this->dispatch('edit-row', $id);
     }
 }

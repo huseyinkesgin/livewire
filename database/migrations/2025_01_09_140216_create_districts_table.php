@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('districts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('city_id')->constrained('cities');
-            $table->string('Code')->unique();
+            $table->string('Code');
             $table->string('Name');
             $table->string('Description')->nullable();
             $table->boolean('Status')->default(true);

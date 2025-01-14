@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Location;
 
-use App\Models\State;
+use App\Models\Lokasyon\State;
 use App\Livewire\Components\BaseTableComponent;
 
 class StateTable extends BaseTableComponent
@@ -15,8 +15,8 @@ class StateTable extends BaseTableComponent
     protected $queryString = [
         'search' => ['except' => ''],
         'sortField' => ['except' => 'Code'],
-        'sortDirection' => ['except' => 'asc'],
-        'perPage' => ['except' => 10],
+        'sortDirection' => ['except' => 'desc'],
+        'perPage' => ['except' => 20],
     ];
 
     protected $listeners = [
@@ -71,16 +71,6 @@ class StateTable extends BaseTableComponent
     {
         try {
             $state = State::findOrFail($id);
-
-            // İl'e bağlı ilçe var mı kontrol et
-            if ($state->cities()->count() > 0) {
-                $this->dispatch('show-message', [
-                    'type' => 'error',
-                    'message' => 'Bu ile bağlı ilçeler bulunmaktadır. Önce ilçeleri silmelisiniz.'
-                ]);
-                return;
-            }
-
             $state->delete();
 
             $this->dispatch('show-message', [
@@ -96,9 +86,15 @@ class StateTable extends BaseTableComponent
                 }
             }
         } catch (\Exception $e) {
+            logger()->error('State deletion error:', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'id' => $id
+            ]);
+
             $this->dispatch('show-message', [
                 'type' => 'error',
-                'message' => 'İl silinirken bir hata oluştu.'
+                'message' => 'İl silinirken bir hata oluştu: ' . $e->getMessage()
             ]);
         }
     }

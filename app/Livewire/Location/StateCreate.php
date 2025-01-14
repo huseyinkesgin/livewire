@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class StateCreate extends Component
 {
     public $showModal = false;
+
     public $form = [
         'Code' => '',
         'Name' => '',
@@ -16,15 +17,23 @@ class StateCreate extends Component
         'Description' => ''
     ];
 
-    protected $listeners = ['openCreateModal' => 'open'];
+    protected $listeners = [
+        'openCreateModal' => 'openCreateModal'
+    ];
 
     public function mount()
     {
         $this->generateCode();
     }
 
-    public function open()
+    public function openCreateModal()
     {
+        $this->form = [
+            'Code' => State::generateCode(),
+            'Name' => '',
+            'Status' => 1,
+            'Description' => ''
+        ];
         $this->showModal = true;
     }
 

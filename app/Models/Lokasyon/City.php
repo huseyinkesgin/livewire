@@ -4,55 +4,33 @@ namespace App\Models\Lokasyon;
 
 use App\Traits\AutoCode;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class City extends Model
 {
     use AutoCode;
 
     protected $table = 'cities';
-    protected $fillable = ['state_id', 'Code', 'Name', 'Description', 'Status'];
+    protected $fillable = ['Code', 'Name', 'Description', 'Status', 'state_id'];
 
-    protected $casts = [
-        'Status' => 'boolean'
-    ];
-
-    public function districts(): HasMany
-    {
-        return $this->hasMany(District::class);
-    }
-
-    public function state(): BelongsTo
+    public function state()
     {
         return $this->belongsTo(State::class);
     }
 
-    ########################### SCOPES ###########################
-    public function scopeActive(Builder $query): Builder
+    public function districts()
     {
-        return $query->where('Status', true);
+        return $this->hasMany(District::class);
     }
 
-    public function scopePassive(Builder $query): Builder
+    public function scopeSearch($query, $term)
     {
-        return $query->where('Status', false);
-    }
-
-    public function scopeSearch(Builder $query, ?string $search)
-    {
-        if ($search) {
-            return $query->where(function ($query) use ($search) {
-                $query->where('Code', 'like', '%' . $search . '%')
-                    ->orWhere('Name', 'like', '%' . $search . '%')
-                    ->orWhere('Description', 'like', '%' . $search . '%')
-                    ->orWhereHas('state', function ($query) use ($search) {
-                        $query->where('Name', 'like', '%' . $search . '%');
-                    });
+        if ($term) {
+            $query->where(function ($query) use ($term) {
+                $query->where('Code', 'like', "%{$term}%")
+                    ->orWhere('Name', 'like', "%{$term}%")
+                    ->orWhere('Description', 'like', "%{$term}%");
             });
         }
-
         return $query;
     }
 }
